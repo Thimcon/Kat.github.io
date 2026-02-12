@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Be My Valentine ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#ff4d6d,#ff8fab,#ffc2d1);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.container{
+    background:white;
+    padding:45px;
+    border-radius:30px;
+    width:90%;
+    max-width:520px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+    animation:fade .8s ease;
+}
+
+h1{
+    color:#ff4d6d;
+}
+
+.question{
+    font-size:24px;
+    margin:25px 0;
+}
+
+button{
+    padding:14px 30px;
+    margin:10px;
+    border:none;
+    border-radius:25px;
+    font-size:17px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.yes{
+    background:#ff4d6d;
+    color:white;
+}
+
+.yes:hover{
+    transform:scale(1.12);
+}
+
+.no{
+    background:#eee;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:translateY(25px);}
+    to{opacity:1;}
+}
+
+.heart{
+    position:absolute;
+    color:white;
+    font-size:22px;
+    animation:float 7s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(110vh);}
+    to{transform:translateY(-10vh);}
+}
+
+.final{
+    font-size:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Background Music -->
+<audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6a1d6a4b9a.mp3" type="audio/mp3">
+</audio>
+
+<div class="container" id="box">
+
+<h1>Hello Love ❤️</h1>
+
+<div class="question" id="question">
+Before I ask something important...
+can you answer a few questions? 🥺
+</div>
+
+<button class="yes" onclick="next()">Of course 💕</button>
+<button class="yes" onclick="next()">Yes 😊</button>
+
+</div>
+
+<script>
+
+const questions = [
+
+"Do you know you are the best thing that ever happened to me?",
+"Did you know my world became brighter when you entered it?",
+"Will you allow me to keep making you smile?",
+"Can I continue being the reason you feel loved?",
+"Are you ready for the most important question of all?"
+
+];
+
+let i=0;
+
+function next(){
+
+    if(i < questions.length){
+        document.getElementById("question").innerHTML = questions[i];
+        i++;
+    }
+    else{
+        finalQuestion();
+    }
+}
+
+function finalQuestion(){
+
+document.getElementById("box").innerHTML=`
+
+<h1 class="final">Will You Be My Valentine? ❤️</h1>
+
+<button class="yes" onclick="yes()">YES!!! 😍</button>
+<button class="no" id="noBtn">No</button>
+`;
+
+const noBtn=document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", ()=>{
+    noBtn.style.position="absolute";
+    noBtn.style.top=Math.random()*80+"%";
+    noBtn.style.left=Math.random()*80+"%";
+});
+
+}
+
+function yes(){
+
+document.getElementById("box").innerHTML=`
+
+<h1>YOU SAID YES!!! ❤️❤️❤️</h1>
+
+<p style="font-size:20px">
+You just made me the happiest person alive.<br><br>
+I promise to make this Valentine unforgettable.
+</p>
+`;
+
+confetti();
+}
+
+//// Floating hearts
+setInterval(()=>{
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*25+10)+"px";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),7000);
+
+},350);
+
+//// Confetti effect
+function confetti(){
+for(let i=0;i<120;i++){
+const c=document.createElement("div");
+c.innerHTML="💖";
+c.style.position="absolute";
+c.style.left=Math.random()*100+"vw";
+c.style.top="-20px";
+c.style.fontSize="20px";
+c.style.animation="float 5s linear";
+document.body.appendChild(c);
+}
+}
+
+</script>
+
+</body>
+</html>
